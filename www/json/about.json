@@ -4,41 +4,85 @@
 	"result": [
 		{
 			"id": 1,
-			"picture": "img/member-1.jpg",
-			"title": "Lorem Ipsum",
-			"subtitle": "Founder & CEO",
-			"body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Duis aute irure dolor eu fugiat nulla pariatur.",
-            "email": "lorem.ipsum@lorem.com",
-            "linkedin": "linkedin",
-            "twitter": "@AppsHybrid"
+			"token": "TXKML",
+			"pedenv": "1",
+			"pedand": "1",
+			"fechaenv": "1",
+			"fechaand": "0",
+            "corfundo": "red"
             
 		}, {
 			"id": 2,
-			"picture": "img/member-2.jpg",
-			"title": "Lorem Ipsum",
-			"subtitle": "Founder & CEO",
-			"body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Duis aute irure dolor eu fugiat nulla pariatur.",
-            "email": "lorem.ipsum@lorem.com",
-            "linkedin": "linkedin",
-            "twitter": "@AppsHybrid"
+			"token": "KKTVX",
+			"pedenv": "3",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "red"
 		}, {
 			"id": 3,
-			"picture": "img/member-3.jpg",
-			"title": "Lorem Ipsum",
-			"subtitle": "Founder & CEO",
-			"body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Duis aute irure dolor eu fugiat nulla pariatur.",
-            "email": "lorem.ipsum@lorem.com",
-            "linkedin": "linkedin",
-            "twitter": "@AppsHybrid"
+			"token": "AAAAB",
+			"pedenv": "0",
+			"pedand": "12",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "#CCCCCC"
 		}, {
 			"id": 4,
-			"picture": "img/member-4.jpg",
-			"title": "Lorem Ipsum",
-			"subtitle": "Founder & CEO",
-			"body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Duis aute irure dolor eu fugiat nulla pariatur.",
-            "email": "lorem.ipsum@lorem.com",
-            "linkedin": "linkedin",
-            "twitter": "@AppsHybrid"
-		}
+			"token": "VBGGR",
+			"pedenv": "0",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "1",
+            "corfundo": "#CCCCCC"
+		}, {
+			"id": 5,
+			"token": "BBBBB",
+			"pedenv": "0",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "#EEEEEE"
+		}, {
+			"id": 6,
+			"token": "CCCCC",
+			"pedenv": "0",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "#EEEEEE"
+		}, {
+			"id": 7,
+			"token": "FFFFF",
+			"pedenv": "0",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "#EEEEEE"
+		}, {
+			"id": 8,
+			"token": "BBBBB",
+			"pedenv": "0",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "#EEEEEE"
+		}, {
+			"id": 9,
+			"token": "CCCCC",
+			"pedenv": "0",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "#EEEEEE"
+		}, {
+			"id": 10,
+			"token": "FFFFF",
+			"pedenv": "0",
+			"pedand": "0",
+			"fechaenv": "0",
+			"fechaand": "0",
+            "corfundo": "#EEEEEE"
+			}
 	]
 }

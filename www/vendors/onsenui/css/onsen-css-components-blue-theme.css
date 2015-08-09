@@ -1864,6 +1864,11 @@ h6 {
   line-height: 19px;
   font-weight: 400;
 }
+
+.notificationverde {
+  background-color: #52dc36;
+}
+
 .notification:empty {
   display: none;
 }
