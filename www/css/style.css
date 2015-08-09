@@ -199,10 +199,10 @@ input[type=email], input[type=password] {
 }
 
 .grid-menu-item {
-    width: 33.3333%;
+    width: 50%;
     height: 100%;
     min-width: 100px;
-    min-height: 100px;
+    min-height: 150px;
     margin: 0;
     padding: 0;
     border-left: 1px solid #cecece!important;
@@ -217,12 +217,12 @@ input[type=email], input[type=password] {
 }
 
 .grid-menu-item ons-icon {
-    margin-top: 20px;
+    margin-top: 40px;
     font-size: 36px;
 }
 
 .grid-menu-item-label {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .grid-menu-item.topcoat-list__item { border:none; }
