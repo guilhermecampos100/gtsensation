@@ -1,0 +1,42 @@
+<ons-page ng-controller="DetalheController">
+  <style>
+
+.margem12 {
+	margin: 12px;
+	}
+	
+</style>  
+    <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">{{item.title}}</div>
+    </ons-toolbar>
+
+            <ons-list class="list-top">
+                    <ons-list-header>Pedidos Enviados</ons-list-header>
+                    <ons-list-item modifier="chevron" ng-repeat="pedido in pedidosativos">
+                        <ons-row>
+                            <ons-col width="12%"> 
+                            <span class="notification margem12">+</span>
+                            </ons-col>
+                            <ons-col class="left">
+                             {{pedido.quantidade}} {{pedido.itemcardapio}}
+                            </ons-col>
+                        </ons-row> 
+                    </ons-list-item>
+                </ons-list>
+
+                <ons-list class="list-top">
+                    <ons-list-header>Pedidos Em Andamento</ons-list-header>
+                    <ons-list-item modifier="chevron" ng-repeat="pedido in pedidosemandamento">
+                        <ons-row>
+                            <ons-col width="12%"> 
+                            <span class="notification notificationverde margem12"> + </span>
+                            </ons-col>
+                            <ons-col class="left">
+                            {{pedido.quantidade}} {{pedido.itemcardapio}}
+                            </ons-col>
+                        </ons-row> 
+                    </ons-list-item>
+                </ons-list>
+
+</ons-page>

@@ -157,6 +157,18 @@ input[type=email], input[type=password] {
     line-height: 48px;
 }
 
+
+.classlogin {
+    display: block;
+    width: 80%;
+    height: 48px;
+    margin: 0 auto;
+    font-size: 19px;
+    outline: none;
+    line-height: 48px;
+}
+
+
 .login-button {
     display: block;
     width: 80%;

@@ -18,6 +18,8 @@
  */
 var app = {
     // Application Constructor
+
+
     initialize: function() {
         this.bindEvents();
     },
@@ -87,9 +89,14 @@ var app = {
     
 };
 
+
+	
+	
 (function() {
     var app = angular.module('sensationApp', ['onsen.directives', 'ngTouch', 'ngSanitize', 'angular-carousel', 'google-maps'.ns(), 'appLocalStorage', 'LocalStorageModule', 'ui.map', 'ui.event', 'nvd3']);
     
+
+	
     app.config(['$httpProvider', function($httpProvider) {
 
         $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
@@ -98,14 +105,14 @@ var app = {
     }]);
     
     // Home Controller
-    app.controller('HomeController', function($scope, Data) {
-        
+    app.controller('HomeController', function($scope, $rootScope, Data) {
+	 
         $scope.items = Data.items;
 
         $scope.showDetail = function(index){
             var selectedItem = $scope.items[index];
             Data.selectedItem = selectedItem;
-            $scope.appNavigator.pushPage(selectedItem.page, {title: selectedItem.title, animation: 'slide'});
+            $scope.MeuNavigator.pushPage(selectedItem.page, {title: selectedItem.title, animation: 'slide'});
         }
         
     });
@@ -132,7 +139,7 @@ var app = {
         $scope.showDetail = function(index){
             var selectedItem = $scope.items[index];
             PluginsData.selectedItem = selectedItem;
-            $scope.appNavigator.pushPage('plugins/' + selectedItem.page, {title: selectedItem.title, animation: 'slide'});
+            $scope.MeuNavigator.pushPage('plugins/' + selectedItem.page, {title: selectedItem.title, animation: 'slide'});
 
         }
         
@@ -140,7 +147,7 @@ var app = {
     
     // Parameters Controller
     app.controller('ParametersController', function($scope) {
-        var page = $scope.appNavigator.getCurrentPage();
+        var page = $scope.MeuNavigator.getCurrentPage();
         $scope.param1 = page.options.param1;
     });
     
@@ -214,7 +221,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.news[index];
         NewsData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('new.html', selectedItem);
+        $scope.MeuNavigator.pushPage('new.html', selectedItem);
         }
         
         // getNews() function()
@@ -240,7 +247,7 @@ var app = {
         var items = $scope.getNews();
         var selectedItem = items[index];
         NewsData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('new.html', selectedItem);
+        $scope.MeuNavigator.pushPage('new.html', selectedItem);
         }
         
     });
@@ -283,7 +290,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.products[index];
         ProductsData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('product.html', selectedItem);
+        $scope.MeuNavigator.pushPage('product.html', selectedItem);
         }
         
     });
@@ -349,7 +356,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.posts[index];
         PostsData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('post.html', selectedItem);
+        $scope.MeuNavigator.pushPage('post.html', selectedItem);
         }
         
     });
@@ -460,7 +467,7 @@ var app = {
         var items = $scope.getServerPosts();
         var selectedItem = items[index];
         ServerPostsData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('serverpost.html', selectedItem);
+        $scope.MeuNavigator.pushPage('serverpost.html', selectedItem);
         }
         
     });
@@ -537,7 +544,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.categories[index];
         CategoriesData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('category-posts.html', selectedItem);
+        $scope.MeuNavigator.pushPage('category-posts.html', selectedItem);
         }
         
     });
@@ -621,7 +628,7 @@ var app = {
         var items = $scope.getCategoryPosts();
         var lastSelectedItem = items[index];
         CategoriesData.lastSelectedItem = lastSelectedItem;
-        $scope.appNavigator.pushPage('category-post.html', lastSelectedItem);
+        $scope.MeuNavigator.pushPage('category-post.html', lastSelectedItem);
         }
         
     });
@@ -730,7 +737,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.feeds[index];
         FeedData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('feed.html', selectedItem);
+        $scope.MeuNavigator.pushPage('feed.html', selectedItem);
         }
 
         $scope.getImage = function(index) {
@@ -772,25 +779,124 @@ var app = {
         
      });
     
-    // About: About Controller
-    app.controller('AboutController', function($scope, $http, AboutData) {
-        
-        $http({method: 'GET', url: AboutData.url}).
-        success(function(data, status, headers, config) {
-            $scope.about = data.result;
-        }).
-        error(function(data, status, headers, config) {
+	
+	  // Login: Login Controller
+	app.controller('loginController', function($scope, $rootScope) {
+		
+		
+		$scope.fazerLogin = function(token) {
+			$rootScope.tokenGlobal = token;
+			if(checkLogin()) {
+				openProtectedPage();
+			}
+		}
 
-        });
+		function openProtectedPage() {
+			MeuNavigator.pushPage('about.html');    
+		}
+
+		function checkLogin() {
+			//temporariry return true;
+			// please write your own logic to detect user login;
+			return true;
+		}    
+	});
+
+	
+    // About: About Controller
+    app.controller('AboutController', function($interval, $scope, $rootScope, $http, AboutData) {
+		
+		$scope.token = $rootScope.tokenGlobal
+		
+
+		
+    // store the interval promise in this variable
+	var promise;
+  
+    // simulated items array
+    $scope.items = [];
+    
+    // starts the interval
+    $scope.start = function() {
+      // stops any running interval to avoid two intervals running at the same time
+      $scope.stop(); 
+      
+      // store the interval promise
+      promise = $interval(atualiza, 1000);
+    };
+  
+    // stops the interval
+    $scope.stop = function() {
+      $interval.cancel(promise);
+    };
+  
+    // starting the interval by default
+    $scope.start();
+ 
+    // stops the interval when the scope is destroyed
+    $scope.$on('$destroy', function() {
+      $scope.stop();
+    });
+		
+		
+
+		
+		function atualiza() {
+			var urljson = 'http://chamagar.com/dashboard/painel/gtjson.asp?token=' + $rootScope.tokenGlobal + '&hora=' + Date.now();
+			$http({method: 'GET', url: urljson}).
+			success(function(data, status, headers, config) {
+				if  (data.garcom[0].nome_garcom == '') {
+					alert('token nao encontrado');
+					$scope.stop();
+					$scope.MeuNavigator.pushPage('login.html');
+
+				} else
+				{	
+					$scope.about = data.mesas;
+					$scope.nome_garcom = data.garcom[0].nome_garcom;
+					$scope.foto_garcom = data.garcom[0].foto_garcom;
+				}
+			}).
+			error(function(data, status, headers, config) {
+				alert('erro no json ' +  data);
+			});	
+		};
+		
+      //  $http({method: 'GET', url: AboutData.url}).
+	  // success(function(data, status, headers, config) {
+      //      $scope.about = data.result;
+      //  }).
+      //  error(function(data, status, headers, config) {
+
+      //  });
         
         $scope.showDetail = function(index) {
         var selectedItem = $scope.about[index];
         AboutData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('member.html', selectedItem);
+        $scope.MeuNavigator.pushPage('detalhe.html', selectedItem);
         }
         
     });
     
+	// About: Detalhe Controller
+    app.controller('DetalheController', function($scope, $rootScope, $http, AboutData) {
+        $scope.item = AboutData.selectedItem;
+		
+		function atualiza() {
+			var urljson = 'http://chamagar.com/dashboard/painel/gtdetalhejson.asp?mesa=' + $scope.item.token + '&token=' + $rootScope.tokenGlobal + '&hora=' + Date.now();
+			$http({method: 'GET', url: urljson}).
+			success(function(data, status, headers, config) {
+				$scope.pedidosativos = data.pedidosativos;
+				$scope.pedidosemandamento = data.pedidosemandamento;
+			}).
+			error(function(data, status, headers, config) {
+				alert('erro no json ' +  data);
+			});	
+		};
+		
+		atualiza();
+     });
+	
     // About: Member Controller
     app.controller('MemberController', function($scope, AboutData) {
         $scope.item = AboutData.selectedItem;
@@ -863,7 +969,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.categories[index];
         FeedPluginData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('feed-category.html', {title : selectedItem.title});
+        $scope.MeuNavigator.pushPage('feed-category.html', {title : selectedItem.title});
         }
 
     });
@@ -877,7 +983,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.items[index];
         FeedPluginData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('feed-master.html', {title : selectedItem.title});
+        $scope.MeuNavigator.pushPage('feed-master.html', {title : selectedItem.title});
         }
 
     });
@@ -941,7 +1047,7 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.feeds[index];
         FeedPluginData.selectedItem = selectedItem;
-        $scope.appNavigator.pushPage('feed-detail.html', selectedItem);
+        $scope.MeuNavigator.pushPage('feed-detail.html', selectedItem);
         }
         
 		$scope.mediaObject = function(item) {

@@ -1,5 +1,4 @@
-<ons-page sliding-menu-ignore="true">
-    
+<ons-page ng-controller="loginController">
     <ons-toolbar>
     <div class="left">
     <ons-toolbar-button onclick="menu.toggleMenu()">
@@ -12,11 +11,12 @@
     <div class="main-image-wrapper">
     <i class="fa fa-sign-in main-image"></i>
     </div>
-    <input type="email" class="text-input--underbar" placeholder="Email" value="">
-    <input type="password" type="text" class="text-input--underbar" placeholder="Password" value="">
+
+	<form ng-submit="fazerLogin(token)">
+    <input type="text" ng-model="token" class="text-input--underbar classlogin" placeholder="Token" value="">
     <br>
-    <button class="button login-button">Log in</button>
+    <button class="button login-button">Entrar</button>
     <br>
-    <button class="button--quiet forgot-password">Forgot password?</button>
+	</form>
 
 </ons-page>
