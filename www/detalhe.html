@@ -8,35 +8,54 @@
 </style>  
     <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">{{item.title}}</div>
+    <div class="center">{{item.mesa}}</div>
     </ons-toolbar>
 
             <ons-list class="list-top">
                     <ons-list-header>Pedidos Enviados</ons-list-header>
-                    <ons-list-item modifier="chevron" ng-repeat="pedido in pedidosativos">
+                    <ons-list-item ng-repeat="pedido in pedidosativos">
                         <ons-row>
                             <ons-col width="12%"> 
                             <span class="notification margem12">+</span>
                             </ons-col>
-                            <ons-col class="left">
+                            <ons-col width="80%">
                              {{pedido.quantidade}} {{pedido.itemcardapio}}
+                            </ons-col>
+							<ons-col class="left">
+                            
+							<label class="checkbox">
+							<input type="checkbox" ng-model="checks[pedido.codigopedido]">
+							<div class="checkbox__checkmark"></div>
+							</label>
+							
                             </ons-col>
                         </ons-row> 
                     </ons-list-item>
+					<ons-list-item>
+					<button ng-click="ShowSelected()">mostrar selecionados</button>
+					</ons-list-item>
                 </ons-list>
 
                 <ons-list class="list-top">
                     <ons-list-header>Pedidos Em Andamento</ons-list-header>
-                    <ons-list-item modifier="chevron" ng-repeat="pedido in pedidosemandamento">
+                    <ons-list-item ng-repeat="pedido in pedidosemandamento">
                         <ons-row>
                             <ons-col width="12%"> 
                             <span class="notification notificationverde margem12"> + </span>
                             </ons-col>
-                            <ons-col class="left">
+                            <ons-col width=80%>
                             {{pedido.quantidade}} {{pedido.itemcardapio}}
                             </ons-col>
+							<ons-col class="left">
+							<label class="checkbox">
+							<input type="checkbox">
+							<div class="checkbox__checkmark"></div>
+							</label>
+							</ons-col>
                         </ons-row> 
                     </ons-list-item>
                 </ons-list>
+
+				<p>checks: {{checks}}</p>
 
 </ons-page>

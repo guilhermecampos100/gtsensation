@@ -880,8 +880,35 @@ var app = {
     
 	// About: Detalhe Controller
     app.controller('DetalheController', function($scope, $rootScope, $http, AboutData) {
+		
+		
+		alert('oi');
         $scope.item = AboutData.selectedItem;
 		
+		$scope.colors = {azul: true, vermelho: true};
+		$scope.checks = {};
+
+		$scope.ShowSelected = function() {
+			var tripa = '';
+			angular.forEach($scope.checks, function(value, key) {
+				if (value) {
+					if (tripa == '') {
+						tripa = key;
+					}
+					else
+					{
+						tripa += '-' + key
+					}
+				}
+				console.log(key + ': ' + value);
+				
+			});
+			alert(tripa);
+		};
+
+
+
+
 		function atualiza() {
 			var urljson = 'http://chamagar.com/dashboard/painel/gtdetalhejson.asp?mesa=' + $scope.item.token + '&token=' + $rootScope.tokenGlobal + '&hora=' + Date.now();
 			$http({method: 'GET', url: urljson}).
