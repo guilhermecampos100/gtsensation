@@ -909,7 +909,7 @@ var app = {
 		$scope.ColocarEmAndamento = function () {
 			var a=1;
 			var tripa = PegaSelecionados('enviado');
-			alert('tripa: ' + tripa + ' pronto para colocar em andamento');
+			//alert('tripa: ' + tripa + ' pronto para colocar em andamento');
 			processaacao(1,tripa);
 
 		}
@@ -925,7 +925,7 @@ var app = {
 		$scope.ColocarEntregue = function () {
 			var a=3;
 			var tripa = PegaSelecionados('em andamento');
-			alert('tripa: ' + tripa + '  pronto para colocar entregue');
+			//alert('tripa: ' + tripa + '  pronto para colocar entregue');
 			processaacao(2,tripa);
 		}
 		
