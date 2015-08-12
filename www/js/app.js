@@ -880,17 +880,68 @@ var app = {
     
 	// About: Detalhe Controller
     app.controller('DetalheController', function($scope, $rootScope, $http, AboutData) {
-		
-		
-		alert('oi');
-        $scope.item = AboutData.selectedItem;
-		
-		$scope.colors = {azul: true, vermelho: true};
-		$scope.checks = {};
 
-		$scope.ShowSelected = function() {
+        $scope.item = AboutData.selectedItem;
+		$scope.checksEnv = {};
+		$scope.checksAnd = {};
+
+		function processaacao(codigoacao,tripa) {
+			var acao = "";
+			if (codigoacao == 1) { acao = "ColocarEmAndamentoMulti"; }
+			if (codigoacao == 2) { acao = "ColocarEntregueMulti"; }
+
+			var segundos = new Date().getTime() / 1000;
+
+			var urljson = 'http://chamagar.com/dashboard/painel/processaacaojson.asp?acao='+ acao + '&tripa='+tripa + '&segundos='+ segundos;
+			$http({method: 'GET', url: urljson}).
+			success(function(data, status, headers, config) {
+				atualiza();
+			}).
+			error(function(data, status, headers, config) {
+				alert('erro no json ' +  data);
+			});	
+			
+			
+		}
+
+		
+			
+		$scope.ColocarEmAndamento = function () {
+			var a=1;
+			var tripa = PegaSelecionados('enviado');
+			alert('tripa: ' + tripa + ' pronto para colocar em andamento');
+			processaacao(1,tripa);
+
+		}
+		
+		
+		$scope.Cancelar = function () {
+			var a=2;
+			var tripa = PegaSelecionados('enviado');
+			alert('tripa: ' +   tripa + ' pronto para cancelar');
+		}
+		
+		
+		$scope.ColocarEntregue = function () {
+			var a=3;
+			var tripa = PegaSelecionados('em andamento');
+			alert('tripa: ' + tripa + '  pronto para colocar entregue');
+			processaacao(2,tripa);
+		}
+		
+		
+		
+		var PegaSelecionados = function(tipo) {
 			var tripa = '';
-			angular.forEach($scope.checks, function(value, key) {
+			var checkboxes = {};
+			
+			if (tipo == 'enviado') {
+				checkboxes = $scope.checksEnv;
+			}
+			if (tipo == 'em andamento') {
+				checkboxes = $scope.checksAnd;
+			}
+			angular.forEach(checkboxes, function(value, key) {
 				if (value) {
 					if (tripa == '') {
 						tripa = key;
@@ -903,7 +954,7 @@ var app = {
 				console.log(key + ': ' + value);
 				
 			});
-			alert(tripa);
+			return tripa;
 		};
 
 

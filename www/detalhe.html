@@ -24,7 +24,7 @@
 							<ons-col class="left">
                             
 							<label class="checkbox">
-							<input type="checkbox" ng-model="checks[pedido.codigopedido]">
+							<input type="checkbox" ng-model="checksEnv[pedido.codigopedido]">
 							<div class="checkbox__checkmark"></div>
 							</label>
 							
@@ -32,7 +32,7 @@
                         </ons-row> 
                     </ons-list-item>
 					<ons-list-item>
-					<button ng-click="ShowSelected()">mostrar selecionados</button>
+					<button ng-click="ColocarEmAndamento()">colocar em andamento</button><button ng-click="Cancelar()">cancelar</button>
 					</ons-list-item>
                 </ons-list>
 
@@ -48,14 +48,16 @@
                             </ons-col>
 							<ons-col class="left">
 							<label class="checkbox">
-							<input type="checkbox">
+							<input type="checkbox" ng-model="checksAnd[pedido.codigopedido]">
 							<div class="checkbox__checkmark"></div>
 							</label>
 							</ons-col>
                         </ons-row> 
                     </ons-list-item>
+					<ons-list-item>
+						<button ng-click="ColocarEntregue()">colocar entregue</button>
+					</ons-list-item>
                 </ons-list>
 
-				<p>checks: {{checks}}</p>
 
 </ons-page>
