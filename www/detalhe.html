@@ -7,12 +7,16 @@
 	
 </style>  
     <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="left"><ons-toolbar-button onclick="MeuNavigator.pushPage('about.html')">Voltar</ons-toolbar-button></div>
     <div class="center">{{item.mesa}}</div>
     </ons-toolbar>
 
             <ons-list class="list-top">
-                    <ons-list-header>Pedidos Enviados</ons-list-header>
+                    <ons-list-header style="min-height:44px;">Pedidos Enviados <span style="float: right; padding-right:12px;">
+						<label class="checkbox">
+							<input type="checkbox" ng-click="MarcarTodos()">
+							<div class="checkbox__checkmark"></div>
+						</label></spam></ons-list-header>
                     <ons-list-item ng-repeat="pedido in pedidosativos">
                         <ons-row>
                             <ons-col width="12%"> 
@@ -39,7 +43,11 @@
                 </ons-list>
 
                 <ons-list class="list-top">
-                    <ons-list-header>Pedidos Em Andamento</ons-list-header>
+                    <ons-list-header style="min-height:44px;">Pedidos Em Andamento<span style="float: right; padding-right:12px;">
+						<label class="checkbox">
+							<input type="checkbox" ng-click="MarcarTodos()" >
+							<div class="checkbox__checkmark"></div>
+						</label></spam></ons-list-header>
                     <ons-list-item ng-repeat="pedido in pedidosemandamento">
                         <ons-row>
                             <ons-col width="12%"> 
@@ -58,7 +66,8 @@
                     </ons-list-item>
 					<ons-list-item>
 					<ons-col class="right">
-						<button class="button" ng-click="ColocarEntregue()">colocar entregue</button>
+						<button  ng-click="ColocarEntregue()">colocar entregue</button> 
+							<button  ng-click="MarcarTodos()">marcar todos</button>
 					</ons-col>
 					</ons-list-item>
                 </ons-list>

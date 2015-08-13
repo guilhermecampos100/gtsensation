@@ -828,6 +828,7 @@ var app = {
     // stops the interval
     $scope.stop = function() {
       $interval.cancel(promise);
+	  promise = undefined;
     };
   
     // starting the interval by default
@@ -873,8 +874,14 @@ var app = {
         $scope.showDetail = function(index) {
         var selectedItem = $scope.about[index];
         AboutData.selectedItem = selectedItem;
+		$scope.stop();
         $scope.MeuNavigator.pushPage('detalhe.html', selectedItem);
         }
+		 
+		$scope.abreLogin = function(index) {
+			$scope.stop();
+			$scope.MeuNavigator.pushPage('login.html',{title: 'Login', animation: 'slide'})
+		}
         
     });
     
@@ -885,6 +892,8 @@ var app = {
 		$scope.checksEnv = {};
 		$scope.checksAnd = {};
 
+		
+		
 		function processaacao(codigoacao,tripa) {
 			var acao = "";
 			if (codigoacao == 1) { acao = "ColocarEmAndamentoMulti"; }
@@ -930,6 +939,14 @@ var app = {
 		}
 		
 		
+		$scope.MarcarTodos = function() {
+				for (x in $scope.checksAnd) {
+					x.checked = true;
+					var a=3;
+				}
+		};
+		
+		
 		
 		var PegaSelecionados = function(tipo) {
 			var tripa = '';
@@ -957,8 +974,8 @@ var app = {
 			return tripa;
 		};
 
-
-
+		$scope.chksOn3 = '';
+		$scope.chksOff3 = '';
 
 		function atualiza() {
 			var urljson = 'http://chamagar.com/dashboard/painel/gtdetalhejson.asp?mesa=' + $scope.item.token + '&token=' + $rootScope.tokenGlobal + '&hora=' + Date.now();
@@ -966,6 +983,26 @@ var app = {
 			success(function(data, status, headers, config) {
 				$scope.pedidosativos = data.pedidosativos;
 				$scope.pedidosemandamento = data.pedidosemandamento;
+				
+				for (x in $scope.pedidosemandamento) {
+					if ($scope.chksOn3 == '') {
+						$scope.chksOn3 += $scope.pedidosemandamento[x].codigopedido + ' : true ';
+						$scope.chksOff3 += $scope.pedidosemandamento[x].codigopedido + ' : false ';
+					}
+					else
+					{
+						$scope.chksOn3 += ',' + $scope.pedidosemandamento[x].codigopedido + ' : true  ';
+						$scope.chksOff3 += ',' + $scope.pedidosemandamento[x].codigopedido + ' : false  ';
+					}
+					var a  = 1;
+				}
+			
+			
+			$scope.chksOn3 = '{' + $scope.chksOn3 + '}';
+			$scope.chksOff3 = '{' + $scope.chksOff3 + '}';
+				
+				
+				
 			}).
 			error(function(data, status, headers, config) {
 				alert('erro no json ' +  data);
@@ -973,6 +1010,13 @@ var app = {
 		};
 		
 		atualiza();
+		
+		$scope.chksOn = '';
+		angular.forEach($scope.pedidosemandamento, function(value, key) {
+			$scope.chksOn += '{' + value + ' : "true"}'
+		});
+		
+		console.log($scope.chksOn)
      });
 	
     // About: Member Controller
