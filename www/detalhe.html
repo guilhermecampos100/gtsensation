@@ -8,13 +8,13 @@
 </style>  
     <ons-toolbar>
     <div class="left"><ons-toolbar-button onclick="MeuNavigator.pushPage('about.html')">Voltar</ons-toolbar-button></div>
-    <div class="center">{{item.mesa}}</div>
+    <div class="center">Mesa {{item.mesa}}</div>
     </ons-toolbar>
 
             <ons-list class="list-top">
-                    <ons-list-header style="min-height:44px;">Pedidos Enviados <span style="float: right; padding-right:12px;">
+                    <ons-list-header style="min-height:44px;" ng-click="MarcarTodosEnv()">Pedidos Enviados <span style="float: right; padding-right:12px;">
 						<label class="checkbox">
-							<input type="checkbox" ng-click="MarcarTodos()">
+							<input type="checkbox" ng-model="chktodosenviados.Selected" ng-click="MarcarTodosEnviados()" >
 							<div class="checkbox__checkmark"></div>
 						</label></spam></ons-list-header>
                     <ons-list-item ng-repeat="pedido in pedidosativos">
@@ -22,16 +22,16 @@
                             <ons-col width="12%"> 
                             <span class="notification margem12">+</span>
                             </ons-col>
-                            <ons-col width="80%">
+                            <ons-col width="80%" ng-click="marca(1,pedido.codigopedido)">
                              {{pedido.quantidade}} {{pedido.itemcardapio}}
                             </ons-col>
 							<ons-col class="left">
                             
 							<label class="checkbox">
-							<input type="checkbox" ng-model="checksEnv[pedido.codigopedido]">
+							<input type="checkbox" ng-model="pedido.Selected" >
 							<div class="checkbox__checkmark"></div>
 							</label>
-							
+
                             </ons-col>
                         </ons-row> 
                     </ons-list-item>
@@ -43,9 +43,9 @@
                 </ons-list>
 
                 <ons-list class="list-top">
-                    <ons-list-header style="min-height:44px;">Pedidos Em Andamento<span style="float: right; padding-right:12px;">
+                    <ons-list-header style="min-height:44px;" ng-click="MarcarTodosEA()">Pedidos Em Andamento<span style="float: right; padding-right:12px;">
 						<label class="checkbox">
-							<input type="checkbox" ng-click="MarcarTodos()" >
+							<input type="checkbox" ng-model="chktodosemandamento.Selected" ng-click="MarcarTodosEmAndamento()" >
 							<div class="checkbox__checkmark"></div>
 						</label></spam></ons-list-header>
                     <ons-list-item ng-repeat="pedido in pedidosemandamento">
@@ -53,12 +53,12 @@
                             <ons-col width="12%"> 
                             <span class="notification notificationverde margem12"> + </span>
                             </ons-col>
-                            <ons-col width=80%>
+                            <ons-col width=80% ng-click="marca(2,pedido.codigopedido)"">
                             {{pedido.quantidade}} {{pedido.itemcardapio}}
                             </ons-col>
 							<ons-col class="left">
 							<label class="checkbox">
-							<input type="checkbox" ng-model="checksAnd[pedido.codigopedido]">
+							<input type="checkbox" ng-model="pedido.Selected">
 							<div class="checkbox__checkmark"></div>
 							</label>
 							</ons-col>
@@ -67,7 +67,6 @@
 					<ons-list-item>
 					<ons-col class="right">
 						<button  ng-click="ColocarEntregue()">colocar entregue</button> 
-							<button  ng-click="MarcarTodos()">marcar todos</button>
 					</ons-col>
 					</ons-list-item>
                 </ons-list>

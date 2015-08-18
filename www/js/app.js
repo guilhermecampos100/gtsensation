@@ -889,10 +889,50 @@ var app = {
     app.controller('DetalheController', function($scope, $rootScope, $http, AboutData) {
 
         $scope.item = AboutData.selectedItem;
-		$scope.checksEnv = {};
-		$scope.checksAnd = {};
+		$scope.chktodosemandamento = [];
+		$scope.chktodosenviados = [];
 
+		$scope.marca = function(tipo, codigo) {
+			if (tipo == 1) {
+				var pedidos = $scope.pedidosativos;
+			}
+			else {
+				var pedidos = $scope.pedidosemandamento;
+			}
+			angular.forEach(pedidos, function (item) {
+				if (item.codigopedido == codigo) {
+					if (item.Selected) {
+						item.Selected = false;
+					}
+					else {
+						item.Selected = true;
+					}
+				}
+			});
+		};
 		
+		$scope.MarcarTodosEnviados = function() {
+			angular.forEach($scope.pedidosativos, function (item) {
+				item.Selected = $scope.chktodosenviados.Selected;
+			});
+		};	
+		
+		$scope.MarcarTodosEmAndamento = function() {
+			angular.forEach($scope.pedidosemandamento, function (item) {
+				item.Selected = $scope.chktodosemandamento.Selected;
+			});
+		};
+		
+		$scope.MarcarTodosEA = function() {
+			$scope.chktodosemandamento.Selected = !$scope.chktodosemandamento.Selected;
+			$scope.MarcarTodosEmAndamento();
+		}
+		
+
+		$scope.MarcarTodosEnv = function() {
+			$scope.chktodosenviados.Selected = !$scope.chktodosenviados.Selected;
+			$scope.MarcarTodosEnviados();
+		}
 		
 		function processaacao(codigoacao,tripa) {
 			var acao = "";
@@ -909,20 +949,15 @@ var app = {
 			error(function(data, status, headers, config) {
 				alert('erro no json ' +  data);
 			});	
-			
-			
 		}
 
-		
-			
+
 		$scope.ColocarEmAndamento = function () {
 			var a=1;
 			var tripa = PegaSelecionados('enviado');
 			//alert('tripa: ' + tripa + ' pronto para colocar em andamento');
 			processaacao(1,tripa);
-
 		}
-		
 		
 		$scope.Cancelar = function () {
 			var a=2;
@@ -930,52 +965,39 @@ var app = {
 			alert('tripa: ' +   tripa + ' pronto para cancelar');
 		}
 		
-		
 		$scope.ColocarEntregue = function () {
 			var a=3;
 			var tripa = PegaSelecionados('em andamento');
 			//alert('tripa: ' + tripa + '  pronto para colocar entregue');
 			processaacao(2,tripa);
 		}
-		
-		
-		$scope.MarcarTodos = function() {
-				for (x in $scope.checksAnd) {
-					x.checked = true;
-					var a=3;
-				}
-		};
-		
-		
+
 		
 		var PegaSelecionados = function(tipo) {
 			var tripa = '';
-			var checkboxes = {};
+			var pedidos = [];
 			
 			if (tipo == 'enviado') {
-				checkboxes = $scope.checksEnv;
+				pedidos = $scope.pedidosativos;
 			}
 			if (tipo == 'em andamento') {
-				checkboxes = $scope.checksAnd;
+				pedidos = $scope.pedidosemandamento;
 			}
-			angular.forEach(checkboxes, function(value, key) {
-				if (value) {
+			angular.forEach(pedidos, function(item) {
+				if (item.Selected) {
 					if (tripa == '') {
-						tripa = key;
+						tripa = item.codigopedido;
 					}
 					else
 					{
-						tripa += '-' + key
+						tripa += '-' + item.codigopedido
 					}
 				}
-				console.log(key + ': ' + value);
 				
 			});
 			return tripa;
 		};
 
-		$scope.chksOn3 = '';
-		$scope.chksOff3 = '';
 
 		function atualiza() {
 			var urljson = 'http://chamagar.com/dashboard/painel/gtdetalhejson.asp?mesa=' + $scope.item.token + '&token=' + $rootScope.tokenGlobal + '&hora=' + Date.now();
@@ -983,26 +1005,6 @@ var app = {
 			success(function(data, status, headers, config) {
 				$scope.pedidosativos = data.pedidosativos;
 				$scope.pedidosemandamento = data.pedidosemandamento;
-				
-				for (x in $scope.pedidosemandamento) {
-					if ($scope.chksOn3 == '') {
-						$scope.chksOn3 += $scope.pedidosemandamento[x].codigopedido + ' : true ';
-						$scope.chksOff3 += $scope.pedidosemandamento[x].codigopedido + ' : false ';
-					}
-					else
-					{
-						$scope.chksOn3 += ',' + $scope.pedidosemandamento[x].codigopedido + ' : true  ';
-						$scope.chksOff3 += ',' + $scope.pedidosemandamento[x].codigopedido + ' : false  ';
-					}
-					var a  = 1;
-				}
-			
-			
-			$scope.chksOn3 = '{' + $scope.chksOn3 + '}';
-			$scope.chksOff3 = '{' + $scope.chksOff3 + '}';
-				
-				
-				
 			}).
 			error(function(data, status, headers, config) {
 				alert('erro no json ' +  data);
@@ -1010,13 +1012,7 @@ var app = {
 		};
 		
 		atualiza();
-		
-		$scope.chksOn = '';
-		angular.forEach($scope.pedidosemandamento, function(value, key) {
-			$scope.chksOn += '{' + value + ' : "true"}'
-		});
-		
-		console.log($scope.chksOn)
+
      });
 	
     // About: Member Controller
