@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.sensation" version="1.8.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Garçcom Template</name>
+    <name>Garçom Template</name>
 
     <description>
     Interface do Garçom usando Sensation template
