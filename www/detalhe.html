@@ -11,7 +11,7 @@
     <div class="center">Mesa {{item.mesa}}</div>
     </ons-toolbar>
 
-            <ons-list class="list-top">
+            <ons-list class="list-top" ng-show="pedidosativos.length > 0">
                     <ons-list-header style="min-height:44px;" ng-click="MarcarTodosEnv()">Pedidos Enviados <span style="float: right; padding-right:12px;">
 						<label class="checkbox">
 							<input type="checkbox" ng-model="chktodosenviados.Selected" ng-click="MarcarTodosEnviados()" >
@@ -42,7 +42,7 @@
 					</ons-list-item>
                 </ons-list>
 
-                <ons-list class="list-top">
+                <ons-list class="list-top"  ng-show="pedidosemandamento.length > 0">
                     <ons-list-header style="min-height:44px;" ng-click="MarcarTodosEA()">Pedidos Em Andamento<span style="float: right; padding-right:12px;">
 						<label class="checkbox">
 							<input type="checkbox" ng-model="chktodosemandamento.Selected" ng-click="MarcarTodosEmAndamento()" >
