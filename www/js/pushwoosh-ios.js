@@ -28,8 +28,9 @@ function registerPushwooshIOS() {
             // Get the notification
             var notification = event.notification;
 
+
             // Display the notification
-            navigator.notification.alert(notification.aps.alert,function() {console.log("Notification success")},"Notification","Close");
+            MeuNavigator.notification.alert(notification.aps.alert,function() {console.log("Notification success")},"Notification","Close");
 
             // View full push payload
             //alert(JSON.stringify(notification));
@@ -39,9 +40,10 @@ function registerPushwooshIOS() {
         }
     );
     
+	
 	// Trigger pending push notifications
     // pw_appid: PushWoosh Application Code
-	pushNotification.onDeviceReady({pw_appid: "XXXXX-XXXXX"});
+	pushNotification.onDeviceReady({pw_appid: "15754-54959"});
 
 	// Register for pushes
 	pushNotification.registerDevice(
