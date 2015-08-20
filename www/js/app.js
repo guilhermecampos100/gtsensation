@@ -891,6 +891,20 @@ var app = {
         $scope.item = AboutData.selectedItem;
 		$scope.chktodosemandamento = [];
 		$scope.chktodosenviados = [];
+		$scope.chamando = false;
+
+		
+		$scope.updateSelection = function($event) {
+		  var checkbox = $event.target;
+		  var action = (checkbox.checked ? 'add' : 'remove');
+		  if (action == 'add') {
+			processaacao(3,$scope.item.token);
+		  }
+		  else {
+			processaacao(4,$scope.item.token);
+		  }
+		};
+
 
 		$scope.marca = function(tipo, codigo) {
 			if (tipo == 1) {
@@ -938,6 +952,8 @@ var app = {
 			var acao = "";
 			if (codigoacao == 1) { acao = "ColocarEmAndamentoMulti"; }
 			if (codigoacao == 2) { acao = "ColocarEntregueMulti"; }
+			if (codigoacao == 3) { acao = "AtivaChamado"; }
+			if (codigoacao == 4) { acao = "DesativaChamado"; }
 
 			var segundos = new Date().getTime() / 1000;
 
@@ -1005,6 +1021,15 @@ var app = {
 			success(function(data, status, headers, config) {
 				$scope.pedidosativos = data.pedidosativos;
 				$scope.pedidosemandamento = data.pedidosemandamento;
+				$scope.chamando = data.mesa[0].chamando;
+				if (data.mesa[0].chamando == 1) {
+					$scope.corchamando = 'red';
+					$scope.chamando = true;
+				}
+				else {
+					$scope.corchamando = 'lightgrey';
+					$scope.chamando = false;
+				}
 			}).
 			error(function(data, status, headers, config) {
 				alert('erro no json ' +  data);

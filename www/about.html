@@ -20,7 +20,8 @@
 			<ons-col width="80px">
 				<section style="padding: 0px 10px 10px 10px;">
 				<div style="background-color:{{member.corfundo}} !important; padding: 10px 10px 10px 10px; border-radius: 5px;"><center>
-				<font style="font-size:30px" >{{member.mesa}}</font>
+				<font style="font-size:30px; color:white;" ng-show="(member.corfundo != 'lightgrey')">{{member.mesa}}</font>
+				<font style="font-size:30px;" ng-show="(member.corfundo == 'lightgrey')" >{{member.mesa}}</font>
 				</center>
                 </div>
 				<center>

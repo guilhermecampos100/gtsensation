@@ -11,18 +11,19 @@
     <div class="center">Mesa {{item.mesa}}</div>
     </ons-toolbar>
 
-	            <ons-list class="list-top" style="padding-top: 10px; background-color:red;">
+	            <ons-list class="list-top" style="padding-top: 10px; background-color:{{corchamando}};">
                     <ons-list-item>
                         <ons-row>
                             <ons-col width="80%" style="margin-top: -5px;">
-								<span style="color:white; font-weight:bold; ">Chamando garçom</span>
+								<span style="color:white; font-weight:bold; " ng-show="chamando">Chamando garçom</span>
+								<span style="color:black; font-size:13px; " ng-show="!chamando">Clique para ativar chamado</span>
                             </ons-col>
 							<ons-col class="left">
 							
 							<span style="float: right; padding-right:2px;">
 								<span style="padding:10px">
 									<label class="switch">
-									<input type="checkbox" class="switch__input" checked>
+									<input type="checkbox" class="switch__input" ng-checked="chamando" ng-click="updateSelection($event)">
 									<div class="switch__toggle"></div>
 									</label>
 								</span>
