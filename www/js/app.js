@@ -898,9 +898,13 @@ var app = {
 		  var checkbox = $event.target;
 		  var action = (checkbox.checked ? 'add' : 'remove');
 		  if (action == 'add') {
+			$scope.chamando = true;
+			$scope.corchamando = 'red';
 			processaacao(3,$scope.item.token);
 		  }
 		  else {
+			$scope.chamando = false;
+			$scope.corchamando = 'lightgrey';
 			processaacao(4,$scope.item.token);
 		  }
 		};
